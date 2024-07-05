@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.card-title {
+    margin-bottom: 10px;
+}
+
+textarea {
+    resize: none;
+}

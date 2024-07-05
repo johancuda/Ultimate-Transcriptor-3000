@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Transcription Helper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Ultimate Transcription 3000</h1>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">Upload Audio</h2>
+                <input type="file" class="form-control-file mb-3" id="audioUpload" accept="audio/*">
+                <audio id="audioPlayer" class="w-100 mb-2" controls></audio>
+                <button id="rewindButton" class="btn btn-secondary">Rewind 5 seconds</button>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">Upload Text</h2>
+                <input type="file" class="form-control-file mb-3" id="textUpload" accept=".vtt, .txt">
+                <textarea id="textArea" class="form-control" rows="10"></textarea>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button id="saveTextButton" class="btn btn-primary">Save Text</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
