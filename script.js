@@ -6,6 +6,19 @@ document.addEventListener("DOMContentLoaded", function() {
     const textArea = document.getElementById('textArea');
     const saveTextButton = document.getElementById('saveTextButton');
 
+    // Load saved audio and text from localStorage
+    const savedAudioSrc = localStorage.getItem('audioSrc');
+    const savedText = localStorage.getItem('textContent');
+
+    if (savedAudioSrc) {
+        audioPlayer.src = savedAudioSrc;
+        audioPlayer.load();
+    }
+
+    if (savedText) {
+        textArea.value = savedText;
+    }
+
     // Handle audio file upload
     audioUpload.addEventListener('change', function(event) {
         const file = event.target.files[0];
@@ -13,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const url = URL.createObjectURL(file);
             audioPlayer.src = url;
             audioPlayer.load();
+            localStorage.setItem('audioSrc', url);
         }
     });
 
@@ -32,9 +46,15 @@ document.addEventListener("DOMContentLoaded", function() {
             const reader = new FileReader();
             reader.onload = function(e) {
                 textArea.value = e.target.result;
+                localStorage.setItem('textContent', e.target.result);
             };
             reader.readAsText(file);
         }
+    });
+
+    // Save text to localStorage on input
+    textArea.addEventListener('input', function() {
+        localStorage.setItem('textContent', textArea.value);
     });
 
     // Handle save text button click
@@ -44,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${textUpload.files[0].name}_${new Date().toJSON().slice(0,19)}.vtt`;
+        // a.download = `${textUpload.files[0].name}_${new Date().toJSON().slice(0,19)}.vtt`;
+        a.download = `transcription_${new Date().toJSON().slice(0,19)}.vtt`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -71,4 +92,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
+
+    // Save text to localStorage before page unload
+    window.addEventListener('beforeunload', function() {
+        localStorage.setItem('textContent', textArea.value);
+    });
+
 });
