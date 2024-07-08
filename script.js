@@ -5,6 +5,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const textUpload = document.getElementById('textUpload');
     const textArea = document.getElementById('textArea');
     const saveTextButton = document.getElementById('saveTextButton');
+    const htmlElement = document.documentElement;
+    const switchElement = document.getElementById('darkModeSwitch');
+
+    // Set the default theme to dark if no setting is found in local storage
+    const currentTheme = localStorage.getItem('bsTheme') || 'dark';
+    htmlElement.setAttribute('data-bs-theme', currentTheme);
+    switchElement.checked = currentTheme === 'dark';
+
+    switchElement.addEventListener('change', function () {
+        if (this.checked) {
+            htmlElement.setAttribute('data-bs-theme', 'dark');
+            localStorage.setItem('bsTheme', 'dark');
+        } else {
+            htmlElement.setAttribute('data-bs-theme', 'light');
+            localStorage.setItem('bsTheme', 'light');
+        }
+    });
 
     const DB_NAME = 'audioTextDB';
     const DB_VERSION = 1;
