@@ -37,9 +37,22 @@
 
         <div class="card mb-4">
             <div class="card-body">
+                <h2 class="card-title">Search and Replace</h2>
+                    <input type="text" id="searchTerm" placeholder="Search term">
+                    <input type="text" id="replaceTerm" placeholder="Replace with">
+                    <button id="searchBtn" class="btn btn-secondary">Search</button>
+                    <button id="replaceBtn" class="btn btn-secondary">Replace</button>
+                    <button id="replaceAllBtn" class="btn btn-secondary">Replace All</button>
+                    <button id="undoBtn" class="btn btn-secondary">Undo</button>
+                    <p id="searchResult"></p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
                 <h2 class="card-title">Upload Text</h2>
                 <input type="file" class="form-control-file mb-3" id="textUpload" accept=".vtt, .txt">
-                <textarea id="textArea" class="form-control" rows="10"></textarea>
+                <textarea id="textArea" class="form-control" rows="30"></textarea>
             </div>
         </div>
 

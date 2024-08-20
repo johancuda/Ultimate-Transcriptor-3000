@@ -210,3 +210,66 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 100);
     });
 });
+
+
+// Variable to store the previous state of the text
+let previousTextState = '';
+
+// Search for term in the transcript
+document.getElementById('searchBtn').addEventListener('click', () => {
+    const searchTerm = document.getElementById('searchTerm').value;
+    const transcript = document.getElementById('textArea').value;
+    
+    if (searchTerm) {
+        const matchCount = (transcript.match(new RegExp(searchTerm, 'gi')) || []).length;
+        document.getElementById('searchResult').textContent = matchCount ? `${matchCount} matches found` : 'No matches found';
+    }
+});
+
+// Replace first occurence of the term in the transcript
+document.getElementById('replaceBtn').addEventListener('click', () => {
+    const searchTerm = document.getElementById('searchTerm').value;
+    const replaceTerm = document.getElementById('replaceTerm').value;
+    const transcriptElement = document.getElementById('textArea');
+    const transcriptText = transcriptElement.value;
+
+    if (searchTerm && replaceTerm) {
+        saveState(transcriptText);  // Save the current state before replacing
+        const regex = new RegExp(searchTerm, 'i');
+        transcriptElement.value = transcriptText.replace(regex, replaceTerm);
+        document.getElementById('searchResult').textContent = `First occurrence replaced.`;
+    }
+});
+
+// Replace all occurences in the transcript
+document.getElementById('replaceAllBtn').addEventListener('click', () => {
+    const searchTerm = document.getElementById('searchTerm').value;
+    const replaceTerm = document.getElementById('replaceTerm').value;
+    const transcriptElement = document.getElementById('textArea');
+    const transcriptText = transcriptElement.value;
+
+    if (searchTerm && replaceTerm) {
+        saveState(transcriptText);  // Save the current state before replacing
+        const regex = new RegExp(searchTerm, 'gi');
+        const matchCount = (transcriptText.match(regex) || []).length;
+        transcriptElement.value = transcriptText.replace(regex, replaceTerm);
+        document.getElementById('searchResult').textContent = `${matchCount} occurrence(s) replaced.`;
+    }
+});
+
+// Return to previous text state
+document.getElementById('undoBtn').addEventListener('click', () => {
+    const transcriptElement = document.getElementById('textArea');
+    if (previousTextState) {
+        transcriptElement.value = previousTextState;  // Revert to the previous state
+        document.getElementById('searchResult').textContent = `Undo successful.`;
+        previousTextState = '';  // Clear the saved state after undoing
+    } else {
+        document.getElementById('searchResult').textContent = `Nothing to undo.`;
+    }
+});
+
+// Save the current text as the previous state
+function saveState(currentText) {
+    previousTextState = currentText;  // Save the current text as the previous state
+}

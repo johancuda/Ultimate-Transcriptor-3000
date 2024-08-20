@@ -14,3 +14,7 @@ body {
 textarea {
     resize: none;
 }
+
+.highlight {
+    background-color: yellow;
+}
