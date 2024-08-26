@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const saveTextButton = document.getElementById('saveTextButton');
     const htmlElement = document.documentElement;
     const switchElement = document.getElementById('darkModeSwitch');
+    const formatSelect = document.getElementById('formatSelect')
 
     // Set the default theme to dark if no setting is found in local storage
     const currentTheme = localStorage.getItem('bsTheme') || 'dark';
@@ -168,12 +169,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Handle save text button click
     saveTextButton.addEventListener('click', function() {
+        const format = formatSelect.options[formatSelect.selectedIndex].text;
         const text = textArea.value;
         const blob = new Blob([text], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `transcription_${new Date().toJSON().slice(0,19)}.vtt`;
+        a.download = `transcription_${new Date().toJSON().slice(0,19)}${format}`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);

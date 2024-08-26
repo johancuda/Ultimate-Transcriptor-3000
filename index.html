@@ -53,7 +53,17 @@
                 <h2 class="card-title">Upload Text</h2>
                 <input type="file" class="form-control-file mb-3" id="textUpload" accept=".vtt, .txt">
                 <textarea id="textArea" class="form-control" rows="30"></textarea>
+                <!-- Text pour contenteditable avec script2-js-->
+                <!-- <div id="textArea" class="form-control" contenteditable="true" style="height: 500px; overflow-y: scroll; border: 1px solid #ced4da; padding: 10px;"></div> -->
             </div>
+        </div>
+
+        <div class="text-center mb-2">
+            <select id="formatSelect" class="form-select-sm" aria-label="Format select">
+                <option selected>Select your save format</option>
+                <option value="1">.txt</option>
+                <option value="2">.vtt</option>
+            </select>
         </div>
 
         <div class="text-center">
